@@ -3,6 +3,61 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// void print_RBTREE(rbtree* rbt) {
+
+//     node_t* nil = rbt->nil;
+
+//     node_t* node_stack[10000];
+//     int top = -1;
+
+//     node_stack[++top] = rbt->root;
+//     while(-1 < top) {
+
+//         node_t* current_node = node_stack[top--];
+//         if(current_node == nil)
+//             continue;
+
+//         node_stack[++top] = current_node->right;
+//         node_stack[++top] = current_node->left;
+
+//         // print key
+//         printf("key: %2d ", current_node->key);
+//         if(current_node->color == RBTREE_BLACK)
+//             printf("(BLACK),\t");
+//         else
+//             printf("(RED),  \t");
+
+//         // print parent
+//         if(current_node->parent == nil)
+//             printf("parent: nil\t");
+//         else 
+//             printf("parent: %d\t", current_node->parent->key);
+
+//         // print left
+//         if(current_node->left == nil)
+//             printf("left: nil ");
+//         else 
+//             printf("left: %2d ", current_node->left->key);
+        
+//         if(current_node->left->color == RBTREE_BLACK)
+//             printf("(BLACK),\t");
+//         else 
+//             printf("(RED),  \t");
+        
+//         // print right
+//         if(current_node->right == nil)
+//             printf("right: nil ");
+//         else 
+//             printf("right: %2d ", current_node->right->key);
+        
+//         if(current_node->right->color == RBTREE_BLACK)
+//             printf("(BLACK)\n");
+//         else 
+//             printf("(RED)\n");
+//     }
+//     printf("\n");
+// }
+
 rbtree *new_rbtree(void) {
   rbtree *p = (rbtree *)calloc(1, sizeof(rbtree));
 
@@ -16,6 +71,7 @@ rbtree *new_rbtree(void) {
 
 void delete_rbtree_helper(rbtree *t, node_t *node) {
   if (node != t -> nil) {
+    // print_RBTREE(t);
     delete_rbtree_helper(t, node -> left);
     delete_rbtree_helper(t, node -> right);
     free(node);
@@ -122,7 +178,7 @@ node_t *rbtree_insert(rbtree *t, const key_t key) {
 
   while (x != t -> nil) {
     y = x;
-    if ((z -> key) <= (x -> key)) {
+    if (key < x -> key) {
       x = x -> left;
     } else {
       x = x -> right;
